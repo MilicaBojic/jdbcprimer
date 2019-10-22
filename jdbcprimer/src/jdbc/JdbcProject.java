@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import controller.MetodeJdbc;
+import model.Kurs;
 public class JdbcProject {
 
 	public static void main(String[] args) {
@@ -12,9 +13,9 @@ public class JdbcProject {
  
 		
 		MetodeJdbc metode= new MetodeJdbc ();
+ Kurs k = metode.vratiKurspoIdju(3);
  
- 
- metode.prikaziSvekurseve () ;
+ System.out.println ("id" + k.getId_kursa()) ;
 	}
 
 }

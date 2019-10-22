@@ -3,6 +3,9 @@ import java.sql.Connection;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import model.Kurs;
+
 import java.sql.*;
 public class MetodeJdbc {
 
@@ -158,6 +161,70 @@ public class MetodeJdbc {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 } 
+	 // lepakkkk ................................
+	 
+	 
+	 public Kurs vratiKurspoIdju (int id) {// import model.kurs
+		 
+		 
+		 Connection konekcija= null;
+		 PreparedStatement pst=null;
+	     ResultSet res= null;
+	 
+	 Kurs kurs= new Kurs ();
+	 try {
+		konekcija =uspostaviKonekciju("kursevi");
+		
+		String query = "Select * from courses where idCourses = ?";
+		pst= konekcija.prepareStatement(query);
+		pst.setInt (1, id);
+		
+		res=pst.executeQuery(); // smestanje rez u tabelu
+		
+	// prolazak kroz listu - vraca boolean  ili true ili false
+		
+		while (res.next())  { // da bi presao sa headera na prvi red
+		
+			//preuzimanje iz result seta
+			
+	kurs.setId_kursa(res.getInt("idCourses")); // UVEK BIRAJ IME ,A NE INDEX 
+	
+		kurs.setImekursa(res.getString ("ime_kursa"));
+		kurs.setCena(res.getDouble("cena")); // da bi se lakse spakovalo u sistemaut
+			
+			
+		
+		System.out.println("Uspostavljena konekcija");
+		}
+		return kurs;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return null;
+	}
+	 finally {
+		 try {
+			res.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			pst.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 }
 	 
 	 
 	 

@@ -4,7 +4,7 @@ public class Kurs {
 	
 private int id_kursa;
 private String imekursa;
-private int cena;
+private double cena;
 
 //bolje private pa se pristupa preko getera i setera da ne bi doslo do ugrozavanja polja
 
@@ -20,18 +20,17 @@ public String getImekursa() {
 public void setImekursa(String imekursa) {
 	this.imekursa = imekursa;
 }
-public int getCena() {
+public double getCena() {
 	return cena;
 }
-public void setCena(int cena) {
+public void setCena(double cena) {
 	this.cena = cena;
 }
 
+/* posto ovo postoji , kada se predje na result set moze da se napravi objekat kurs i onda umesto smestanja u promenljivu kurs.
+ * setid time se na objekat koji se zove kurs setuje id i onda on sam vraca taj objekat
 
-
-
-
-
+*/
 
 
 
