@@ -1,4 +1,5 @@
 package jdbc;
+import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,41 +11,21 @@ public class JdbcProject {
 		// TODO Auto-generated method stub
  
 		
-	//	MetodeJdbc metodeJdbc= new MetodeJdbc ();
- 
- 		
-		Connection konekcija= null;  //pozivanje metode i cuvanje u promenljivoj
-		Statement statement = null;
-		
-		
- try {
-	konekcija = MetodeJdbc.uspostaviKonekciju("kursevi");
-	System.out.println("Uspostavio konekciju");
-	
-	String query=" insert into courses values (null,'C#', 10000)";
-	statement= konekcija.createStatement();
-	statement.execute(query);
-	System.out.println("Uspesan unos");
-} catch (SQLException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-	System.out.println("Nema konekcije");
-}
+		MetodeJdbc metode= new MetodeJdbc ();
  
  
+         Scanner scanner = new Scanner (System.in);
+ System.out.println("Unesite ime");
+ String imekursa = scanner.nextLine();
  
+ System.out.println ("Unesite cenu");
+ String cenaunos = scanner.nextLine();
+    		   
+    		   
+    	int cena= Integer.parseInt (scanner.nextLine());	   
+                 scanner.close();
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ metode.izmeniCennuKursa(imekursa, cena);
 	}
 
 }
