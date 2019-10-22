@@ -14,18 +14,7 @@ public class JdbcProject {
 		MetodeJdbc metode= new MetodeJdbc ();
  
  
-         Scanner scanner = new Scanner (System.in);
- System.out.println("Unesite ime");
- String imekursa = scanner.nextLine();
- 
- System.out.println ("Unesite cenu");
- String cenaunos = scanner.nextLine();
-    		   
-    		   
-    	int cena= Integer.parseInt (scanner.nextLine());	   
-                 scanner.close();
- 
- metode.izmeniCennuKursa(imekursa, cena);
+ metode.prikaziSvekurseve () ;
 	}
 
 }

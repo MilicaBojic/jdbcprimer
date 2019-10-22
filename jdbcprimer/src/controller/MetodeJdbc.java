@@ -1,5 +1,6 @@
 package controller;
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.*;
@@ -102,4 +103,69 @@ public class MetodeJdbc {
 	 
 	 
 	 }}
+	 
+	 
+	 public void prikaziSvekurseve () {
+	 
+	 
+		 Connection konekcija= null;
+		 PreparedStatement pst=null;
+	 ResultSet res= null;
+	 
+	 
+	 try {
+		konekcija =uspostaviKonekciju("kursevi");
+		
+		String query = "Select * from courses";
+		pst= konekcija.prepareStatement(query);
+		res=pst.executeQuery(); // smestanje rez u tabelu
+		
+	// prolazak kroz listu - vraca boolean  ili true ili false
+		
+		while (res.next())  { // da bi presao sa headera na prvi red
+		
+			//preuzimanje iz result seta
+			
+		int id=	res.getInt("idCourses"); // UVEK BIRAJ IME ,A NE INDEX 
+		String ime=	res.getString ("ime_kursa");
+		Double cena=	res.getDouble("cena"); // da bi se lakse spakovalo u sistemaut
+			
+			
+		System.out.println(id+ " "+ ime+ " "+cena);
+		System.out.println("Uspostavljena konekcija");
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 finally {
+		 try {
+			res.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			pst.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 }
+	 try {
+		konekcija.close();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 } 
+	 
 }
