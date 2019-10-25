@@ -1,10 +1,12 @@
 package controller;
 import java.sql.Connection;
 
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import model.Kurs;
+import model.User;
 
 import java.sql.*;
 public class MetodeJdbc {
@@ -223,16 +225,69 @@ public class MetodeJdbc {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+					}
+	 }}
+	 
+	 
+	 //novo-cas 15
+	 //vraca metoda usera na osnovu id
+	 
+	 public User vratiUserapoIdu (int id) {
+	 
+	
+			 Connection konekcija= null;
+			 PreparedStatement pst=null;
+		     ResultSet res= null;
+		 
+		 User user= new User ();
+		
+		 
+		 try {
+			konekcija =uspostaviKonekciju("kursevi");
+			System.out.println (" konekcija uspostavljena");
+			String query = "Select * from courses where idUsers= ?";
+			pst= konekcija.prepareStatement(query);
+			pst.setInt (1, id);
+			
+			res=pst.executeQuery(); 
+		
+			while (res.next())  { 
+			
+				
+				
+		user.setIdUser(res.getInt("idUser"));  
+		user.setUsername(res.getString ("username"));
+		user.setPassword(res.getString("password")); 
+		user.setMatBroj(res.getInt("matBroj")); 
+			
+			System.out.println("Uspostavljena konekcija");
+			}
+			return user;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
-	 }
+		 finally {
+			 try {
+				res.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 try {
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+						}
+		 }}
+		 
 	 
 	 
 	 
 	 
 	 
-	 
-	 
-	 
-	 } 
+	  
 	 
 }
